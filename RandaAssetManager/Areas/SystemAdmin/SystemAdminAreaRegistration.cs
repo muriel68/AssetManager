@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace RandaAssetManager.Areas.Sites
+namespace RandaAssetManager.Areas.SystemAdmin
 {
-    public class SitesAreaRegistration : AreaRegistration 
+    public class SystemAdminAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "Sites";
+                return "SystemAdmin";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Sites_default",
-                "Sites/{controller}/{action}/{id}",
+                "SystemAdmin_default",
+                "SystemAdmin/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

@@ -22,16 +22,6 @@ namespace DAL.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Asset>()
-            //    .HasMany<Event>(s => s.)
-            //    .WithMany(c => c.)
-            //    .Map(cs =>
-            //    {
-            //        cs.MapLeftKey("StudentRefId");
-            //        cs.MapRightKey("CourseRefId");
-            //        cs.ToTable("StudentCourse");
-            //    });
-
             base.OnModelCreating(modelBuilder);
         }
 

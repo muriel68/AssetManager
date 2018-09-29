@@ -12,12 +12,12 @@ namespace DAL.Entities
         [Key]
         public int AssetId { get; set; }
         public string Name { get; set; }
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
         public string Description { get; set; }
         public string ModelNumber { get; set; }
         public string SerielNumber { get; set; }
-        public SqlMoney Cost { get; set; }
-        public DateTime PurchaseDate { get; set; }
+        public decimal? Cost { get; set; }
+        public DateTime? PurchaseDate { get; set; }
 
         public ICollection<Event> Events { get; set; }
         public ICollection<Audit> Audits { get; set; }
