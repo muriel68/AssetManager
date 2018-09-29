@@ -1,3 +1,5 @@
+using DAL.Models;
+
 namespace DAL.Migrations
 {
     using System;
@@ -5,14 +7,14 @@ namespace DAL.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DAL.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DAL.Models.RandaDBContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(DAL.Models.ApplicationDbContext context)
+        protected override void Seed(DAL.Models.RandaDBContext context)
         {
             //  This method will be called after migrating to the latest version.
 

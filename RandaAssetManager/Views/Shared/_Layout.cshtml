@@ -1,43 +1,193 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en-gb">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Enterprise Portal</title>
+
+    @Styles.Render("~/Content/ej/web/bootstrap-theme/ej.web.all.min.css")
     @Styles.Render("~/Content/css")
+
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/jsrender.min.js")
+    @Scripts.Render("~/Scripts/ej/i18n/ej.culture.en-GB.min.js")
+    @Scripts.Render("~/Scripts/ej/web/ej.web.all.min.js")
+    <script src="~/Scripts/VHScript.js?nocache=@Guid.NewGuid()"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            <img src="~/Content/Images/randa_sm.png" alt="Enterprise Logo" width="125" />
+            <h5 class="nav-item"><i>Asset Management</i></h5>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a> </li>
+                <li>@Html.ActionLink("About", "About", "Home", new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })</li>
+
+                &nbsp;  &nbsp;
+                <li>@Html.ActionLink("Assets", "Index", "Asset", new { Area = "Assets" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Assets Past Due", "Index", "Asset", new { Area = "Assets" }, new { @class = "nav-link" })</li>
+                <li>@Html.ActionLink("Maintenance Due", "Index", "Asset", new { Area = "Assets" }, new { @class = "nav-link" })</li>
+
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        System Admin
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                        <li>@Html.ActionLink("Assets", "Index", "", new { area = "Assets" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Locations", "Index", "", new { area = "Locations" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Sites", "Index", "", new { area = "Sites" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Category", "Index", "", new { area = "Category" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Staff", "Index", "", new { area = "Staff" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Suppliers", "Index", "", new { area = "Suppliers" }, new { @class = "nav-link" })</li>
+
+                    </ul>
+                </li>
+
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("UserAdmin"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            System Admin
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @*<li><a class="dropdown-item" href="#">Users</a></li>*@
+                            <li>
+                                <a href="@Url.Action("Index", "UserAdmin", new { area = "UserAdmin" }, null)" class="dropdown-item">Users</a>
+                            </li>
+                            @*<li><a class="dropdown-item" href="#">Roles</a></li>*@
+                        </ul>
+                    </li>
+                }
+            </ul>
+
+            @*<form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>*@
+
+            <div class="float-right">
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+    </nav>
+
+
+
+
+
+    <div class="container-fluid body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+
+    </div>
+    <footer class="footer navbar-fixed-bottom text-center">
+        <p>&copy; @DateTime.Now.Year - R & A</p>
+    </footer>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="vhModal" tabindex="-1" role="dialog" aria-labelledby="vhModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title" id="exampleModalLabel">Virginia Hayward Export</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-light">
+                    ...
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" id="ExportVHFiles">Export</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+        //$('#ajaxBusy').css({
+        //    margin: "0px",
+        //    paddingLeft: "0px",
+        //    paddingRight: "0px",
+        //    paddingTop: "0px",
+        //    paddingBottom: "0px",
+        //    position: "absolute",
+        //    right: "50%",
+        //    top: "50%",
+        //    width: "auto"
+        //});
+
+        $(document).submit(function (evt) {
+          //  debugger
+            var target = evt.target.outerHTML;
+            if (target.indexOf("Export") > 0) {
+                var GridModel = evt.target.GridModel.defaultValue;
+            }
+            else {
+                $.blockUI({
+
+                    message: "Please wait, submitting",
+                    css: {
+                        border: 'none',
+                        padding: '15px',
+                        backgroundColor: '#000',
+                        '-webkit-border-radius': '10px',
+                        '-moz-border-radius': '10px',
+                        opacity: .5,
+                        color: '#fff'
+
+                    }
+                });
+            }
+        });
+
+        $(document).ajaxStart(function () {
+          //  debugger;
+            $.blockUI({
+                message: "Please wait",
+                css: {
+                    border: 'none',
+                    padding: '15px',
+                    backgroundColor: '#000',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    opacity: .5,
+                    color: '#fff'
+
+                }
+            });
+        }).ajaxStop(function () {
+            $.unblockUI($('#ajaxBusy'));
+        });
+    });
+
+</script>
+
+
+

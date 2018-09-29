@@ -5,9 +5,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using DAL;
 using DAL.Models;
+using DAL.Repos;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+
 
 
 namespace RandaAssetManager.Models

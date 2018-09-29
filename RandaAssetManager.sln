@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandaAssetManager", "RandaAssetManager\RandaAssetManager.csproj", "{2416B65D-E4F2-441D-A8FC-CC7F132AF453}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandaAssetManager.Tests", "RandaAssetManager.Tests\RandaAssetManager.Tests.csproj", "{8335943F-3E80-46C3-A517-99F4642DFBEC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{114D555F-6EBB-45E2-AD19-06BCA2E9BA21} = {114D555F-6EBB-45E2-AD19-06BCA2E9BA21}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{114D555F-6EBB-45E2-AD19-06BCA2E9BA21}"
 EndProject

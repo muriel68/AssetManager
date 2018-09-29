@@ -2,27 +2,31 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
+using DAL.Interfaces;
+using DAL.Repos;
+
 
 namespace DAL.Models
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext, IDisposable
     {
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
+           
         }
 
-        public DbSet<UserTokenCache> UserTokenCacheList { get; set; }
-    }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
 
-    public class UserTokenCache
-    {
-        [Key]
-        public int UserTokenCacheId { get; set; }
-        public string webUserUniqueId { get; set; }
-        public byte[] cacheBits { get; set; }
-        public DateTime LastWrite { get; set; }
+
+        [Unity.Attributes.Dependency]
+        public DbSet<UserTokenCache> UserTokenCacheList { get; set; }
     }
 }
