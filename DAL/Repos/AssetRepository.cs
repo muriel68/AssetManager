@@ -38,7 +38,7 @@ namespace DAL.Repos
 
         public void Update(Asset entity)
         {
-            Asset query = _context.Assets.FirstOrDefault(a => a.AssetID == entity.AssetID);
+            Asset query = _context.Assets.FirstOrDefault(a => a.AssetId == entity.AssetId);
             query = entity;
         }
     }

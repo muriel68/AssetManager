@@ -99,6 +99,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Entities\Address.cs" />
+    <Compile Include="Entities\Audit.cs" />
+    <Compile Include="Entities\AuditType.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\ContactType.cs" />
+    <Compile Include="Entities\Department.cs" />
+    <Compile Include="Entities\Event.cs" />
+    <Compile Include="Entities\EventType.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\Site.cs" />
+    <Compile Include="Entities\Staff.cs" />
+    <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Interfaces\IRandaDBContext.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IAssetRepository.cs" />
@@ -106,6 +119,14 @@
     <Compile Include="Migrations\201809282117018_Initial.cs" />
     <Compile Include="Migrations\201809282117018_Initial.Designer.cs">
       <DependentUpon>201809282117018_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809291704143_EventTypes1.cs" />
+    <Compile Include="Migrations\201809291704143_EventTypes1.Designer.cs">
+      <DependentUpon>201809291704143_EventTypes1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809291718243_CategoryProblems.cs" />
+    <Compile Include="Migrations\201809291718243_CategoryProblems.Designer.cs">
+      <DependentUpon>201809291718243_CategoryProblems.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\RandaDBContext.cs" />
     <Compile Include="Repos\AssetRepository.cs" />
@@ -125,6 +146,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809282117018_Initial.resx">
       <DependentUpon>201809282117018_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809291704143_EventTypes1.resx">
+      <DependentUpon>201809291704143_EventTypes1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809291718243_CategoryProblems.resx">
+      <DependentUpon>201809291718243_CategoryProblems.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
