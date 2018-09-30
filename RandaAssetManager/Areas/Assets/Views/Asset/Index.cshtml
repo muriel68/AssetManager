@@ -1,8 +1,111 @@
 ﻿
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .e-grid .e-groupdroparea {
+        /* background: #3277b2; */
+        background: -moz-linear-gradient(top,#3277b2,#296293);
+        /* background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#3277b2),color-stop(100%,#296293)); */
+        /* background: -webkit-linear-gradient(top,#3277b2,#296293); */
+        background: -o-linear-gradient(top,#3277b2,#296293);
+        background: -ms-linear-gradient(top,#3277b2,#296293);
+        background: linear-gradient(to bottom,#e7e8e9,#737474);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3277b2',endColorstr='#296293',GradientType=0);
+    }
+</style>
+
 <h2>Assets</h2>
 
+@(Html.EJ().Grid<dynamic>("AssetGrid")
+                            .Datasource(ds => ds.URL("/Assets/Asset/AssetDataSource").UpdateURL("Asset/Update").InsertURL("Asset/Insert").RemoveURL("Asset/Delete").Adaptor(AdaptorType.JsonAdaptor).Offline(true))
+                            .IsResponsive(true)
+                            .EnableResponsiveRow(true)
+                            .EnablePersistence(false)
+                            .AllowGrouping()
+                            .GroupSettings(group => { group.EnableDropAreaAutoSizing(false); })
+                            .AllowFiltering()
+                            .AllowPaging()
+                            .FilterSettings(filter => { filter.FilterType(Syncfusion.JavaScript.FilterType.Excel); })
+                            .EditSettings(edit =>
+                            {
+                                edit.AllowAdding()
+                                .AllowDeleting()
+                                .AllowEditing().EditMode(Syncfusion.JavaScript.EditMode.InlineFormTemplate).InlineFormTemplateID("#CreateAssetDiv").ShowDeleteConfirmDialog();
+                            })
+
+                        .ToolbarSettings(toolbar =>
+                        {
+                            toolbar.ShowToolbar().CustomToolbarItems(new List<object>() { "Bold", new Syncfusion.JavaScript.Models.CustomToolbarItem() { TemplateID = "#Details" }, new Syncfusion.JavaScript.Models.CustomToolbarItem() { TemplateID = "#refresh" } })
+                                .ToolbarItems(items =>
+                                {
+                                    items.AddTool(ToolBarItems.Add);
+                                    items.AddTool(ToolBarItems.Edit);
+                                    items.AddTool(ToolBarItems.Delete);
+                                    items.AddTool(ToolBarItems.Update);
+                                    //items.AddTool(ToolBarItems.Cancel);
+                                });
+                        })
+
+                        .SelectionType(SelectionType.Multiple)
+                        .SelectionSettings(select => { select.SelectionMode(mode => { mode.AddMode(SelectionMode.Row); }); })
+
+                .Columns(col =>
+                {
+
+                    col.Field("AssetId").HeaderText("AssetId").IsPrimaryKey(true).TextAlign(TextAlign.Right).Width(75).AllowGrouping(false).Visible(false).EditType(EditingType.NumericEdit).Add();
+                    col.Field("Name").HeaderText("Name").Width(100).AllowFiltering().AllowGrouping(false).EditType(EditingType.StringEdit).Add();
+                    col.Field("Description").HeaderText("Desc").Width(75).AllowGrouping(false).EditType(EditingType.StringEdit).ValidationRules(v => v.AddRule("required", true)).Add();
+                    col.Field("SerielNumber").HeaderText("Seriel").Width(75).AllowGrouping(false).EditType(EditingType.StringEdit).ValidationRules(v => v.AddRule("required", true)).Add();
+                    col.Field("Cost").HeaderText("Cost").Width(75).AllowGrouping(false).EditType(EditingType.StringEdit).ValidationRules(v => v.AddRule("required", true)).Add();
+                    col.Field("PurchaseDate").HeaderText("Purchased").Width(75).AllowGrouping(false).EditType(EditingType.Datepicker).Format("{0:dd/MM/yyyy}").Add();
+                    col.Field("Department").HeaderText("Dept").Width(75).AllowGrouping(false).EditType(EditingType.StringEdit).ValidationRules(v => v.AddRule("required", true)).Add();
+
+                    //col.HeaderText("").Template("<a href='/Users/Users/Edit/{{:UserId}}'><i class='glyphicon glyphicon-pencil'></i></a>").AllowFiltering(false).Width(20).Add();
+                })
+ 
+      )
+
+<script type="text/template" id="CreateAssetDiv">
+
+    <form>
+
+        <input type="hidden" id="UserID" value="{{: AssetId}}" />
+
+        <b id="templateHeader">Asset</b>
+
+        <section class="container ">
+
+            <br />
+            <section class="row">
+                <div class="col-6">
+                        <p>Name:</p>
+                        <input id="Name" name="Name" value="{{: Name}}" class="form-control LAlign" />
+                        <br />
+                        <p>Description:</p>
+                        <input id="Description" name="Description" value="{{: Description}}" class="form-control" />
+                        <br />
+                        <p>Serial Number:</p>
+                        <input id="SerielNumber" name="SerielNumber" value="{{: SerielNumber}}" class="form-control" />
+                        <br />
+                    </div>
+                    <div class="col-6">
+                        <p>Cost:</p>
+                        <input id="Cost" name="Cost" value="{{: Cost}}" class="form-control" />
+                        <br />
+                        <p>Purchase Date:</p>
+                        <input id="PurchaseDate" name="PurchaseDate" value="{{:PurchaseDate}}" class="form-control" />
+                        <br />
+                        <p>Department:</p>
+                        <input id="Department" name="Department" value="{{:Department}}" class="form-control" />
+                        <br />
+                    </div>
+            </section>
+        </section>
+    </form>
+</script>
+
+@Html.EJ().ScriptManager()

@@ -47,6 +47,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Dynamic" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -128,6 +129,10 @@
     <Compile Include="Migrations\201809291718243_CategoryProblems.Designer.cs">
       <DependentUpon>201809291718243_CategoryProblems.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809301332335_FirstDraftSchema.cs" />
+    <Compile Include="Migrations\201809301332335_FirstDraftSchema.Designer.cs">
+      <DependentUpon>201809301332335_FirstDraftSchema.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\RandaDBContext.cs" />
     <Compile Include="Repos\AssetRepository.cs" />
     <Compile Include="Repos\Repository.cs" />
@@ -152,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809291718243_CategoryProblems.resx">
       <DependentUpon>201809291718243_CategoryProblems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809301332335_FirstDraftSchema.resx">
+      <DependentUpon>201809301332335_FirstDraftSchema.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

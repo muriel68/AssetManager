@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en-gb">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Enterprise Portal</title>
+
 
     @Styles.Render("~/Content/ej/web/bootstrap-theme/ej.web.all.min.css")
     @Styles.Render("~/Content/css")
@@ -12,9 +15,9 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/jsrender.min.js")
-    @Scripts.Render("~/Scripts/ej/i18n/ej.culture.en-GB.min.js")
+    @*@Scripts.Render("~/Scripts/ej/i18n/ej.culture.en-GB.min.js")*@
     @Scripts.Render("~/Scripts/ej/web/ej.web.all.min.js")
-    <script src="~/Scripts/VHScript.js?nocache=@Guid.NewGuid()"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -56,8 +59,7 @@
                     </ul>
                 </li>
 
-                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("UserAdmin"))
-                {
+           
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             System Admin
@@ -70,7 +72,7 @@
                             @*<li><a class="dropdown-item" href="#">Roles</a></li>*@
                         </ul>
                     </li>
-                }
+        
             </ul>
 
             @*<form class="form-inline my-2 my-lg-0">
@@ -100,7 +102,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="vhModal" tabindex="-1" role="dialog" aria-labelledby="vhModalLabel" aria-hidden="true">
+    @*<div class="modal fade" id="vhModal" tabindex="-1" role="dialog" aria-labelledby="vhModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-light">
@@ -119,15 +121,16 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 
     @RenderSection("scripts", required: false)
+    @Html.EJ().ScriptManager()
 
 </body>
 </html>
 
 
-<script type="text/javascript">
+@*<script type="text/javascript">
 
     $(function () {
 
@@ -146,10 +149,7 @@
         $(document).submit(function (evt) {
           //  debugger
             var target = evt.target.outerHTML;
-            if (target.indexOf("Export") > 0) {
-                var GridModel = evt.target.GridModel.defaultValue;
-            }
-            else {
+
                 $.blockUI({
 
                     message: "Please wait, submitting",
@@ -164,7 +164,6 @@
 
                     }
                 });
-            }
         });
 
         $(document).ajaxStart(function () {
@@ -187,7 +186,7 @@
         });
     });
 
-</script>
+</script>*@
 
 
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,8 @@ using System.Web.Mvc;
 using DAL.Entities;
 using DAL.Interfaces;
 using DAL.Models;
+using Syncfusion.JavaScript;
+using Syncfusion.JavaScript.DataSources;
 
 namespace RandaAssetManager.Areas.Assets.Controllers
 {
@@ -25,8 +28,7 @@ namespace RandaAssetManager.Areas.Assets.Controllers
         // GET: Assets/Asset
         public ActionResult Index()
         {
-            var assets = this._assetRepo.GetAll(); 
-            return View(assets);
+            return View();
         }
 
         public ActionResult Update(Asset asset)
@@ -37,5 +39,35 @@ namespace RandaAssetManager.Areas.Assets.Controllers
             }
             return View();
         }
+
+        public ActionResult AssetDataSource(DataManager dm)
+        {
+            var AssetList = _assetRepo.GetAll()
+                .Select(u => new 
+                {
+                    AssetId = u.AssetId,
+                    CategoryName = u.Category.CategoryName,
+                    Name = u.Name,
+                    Department = u.Department.Name,
+                    Cost = u.Cost,
+                    PurchaseDate = u.PurchaseDate,
+                    SerielNumber = u.Description,
+                    Description = u.Description
+                }).ToList();
+
+            DataResult result = new DataResult();
+            DataOperations operation = new DataOperations();
+            result.result = AssetList;
+            result.count = AssetList.Count();
+
+            result.result = operation.Execute(result.result, dm);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+    }
+    public class DataResult
+    {
+        public IEnumerable result { get; set; }
+        public int count { get; set; }
     }
 }
