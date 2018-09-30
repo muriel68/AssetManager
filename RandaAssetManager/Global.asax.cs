@@ -13,7 +13,8 @@ namespace RandaAssetManager
     {
         protected void Application_Start()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("@31352e342e30HeusXwTvdaCasTHDg2k5J/whEE3zCWBHHqrzzy/MTbA=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzAyMzFAMzEzNjJlMzMyZTMwZm1Ob3ZGZ0tvbHVyU3lVZmJvaTZPVVVzaUpLV3g2ejg1TWQxakRDZlV2Yz0=");
+
             AreaRegistration.RegisterAllAreas();
             UnityConfig.RegisterComponents();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
