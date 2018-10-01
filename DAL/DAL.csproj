@@ -99,7 +99,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Audit.cs" />
     <Compile Include="Entities\AuditType.cs" />
@@ -115,7 +114,6 @@
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Interfaces\IRandaDBContext.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Interfaces\IAssetRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\201809282117018_Initial.cs" />
     <Compile Include="Migrations\201809282117018_Initial.Designer.cs">
@@ -134,7 +132,6 @@
       <DependentUpon>201809301332335_FirstDraftSchema.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\RandaDBContext.cs" />
-    <Compile Include="Repos\AssetRepository.cs" />
     <Compile Include="Repos\Repository.cs" />
     <Compile Include="Repos\UnitOfWork.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -161,6 +158,9 @@
     <EmbeddedResource Include="Migrations\201809301332335_FirstDraftSchema.resx">
       <DependentUpon>201809301332335_FirstDraftSchema.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Start\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

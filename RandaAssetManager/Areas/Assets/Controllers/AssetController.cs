@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using DAL.Entities;
 using DAL.Interfaces;
 using DAL.Models;
+using Service.Interfaces;
 using Syncfusion.JavaScript;
 using Syncfusion.JavaScript.DataSources;
 
@@ -14,15 +15,15 @@ namespace RandaAssetManager.Areas.Assets.Controllers
 {
     public class AssetController : Controller
     {
-        private IAssetRepository _assetRepo;
+        private IAssetService _assetService;
         private IUnitOfWork _uow;
         public AssetController()
         {
         }
-        public AssetController(IAssetRepository assetRepo, 
+        public AssetController(IAssetService assetService, 
                                 IUnitOfWork uow)
         {
-            this._assetRepo = assetRepo;
+            this._assetService = assetService;
             this._uow = uow;
         }
         // GET: Assets/Asset
@@ -35,14 +36,14 @@ namespace RandaAssetManager.Areas.Assets.Controllers
         {
             if (ModelState.IsValid)
             {
-                this._assetRepo.Update(asset);
+                this._assetService.EditAsset(asset);
             }
             return View();
         }
 
         public ActionResult AssetDataSource(DataManager dm)
         {
-            var AssetList = _assetRepo.GetAll()
+            var AssetList = _assetService.GetAllAssets()
                 .Select(u => new 
                 {
                     AssetId = u.AssetId,

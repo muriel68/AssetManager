@@ -507,6 +507,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Areas\Assets\AssetsAreaRegistration.cs" />
     <Compile Include="Areas\Assets\Controllers\AssetController.cs" />
     <Compile Include="Areas\SystemAdmin\Controllers\SiteController.cs" />
@@ -1126,6 +1127,10 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{114d555f-6ebb-45e2-ad19-06bca2e9ba21}</Project>
       <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{86ccb121-8747-4942-8d89-90c77a99c79b}</Project>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
