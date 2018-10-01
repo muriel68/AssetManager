@@ -13,6 +13,9 @@ namespace Service.Services
     {
         IRepository<Asset> _assetRepository;
         IUnitOfWork _unitOfWork;
+
+        public IRandaDBContext Context { get; set; }
+
         public AssetService(IRepository<Asset> assetRepository, IUnitOfWork unitOfWork)
         {
             _assetRepository = assetRepository;

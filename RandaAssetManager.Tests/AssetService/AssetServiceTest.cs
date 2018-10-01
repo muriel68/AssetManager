@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Entities;
 using DAL.Interfaces;
+using DAL.Models;
+using DAL.Repos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Service.Interfaces;
 
 namespace RandaAssetManager.Tests.AssetService
@@ -19,16 +23,23 @@ namespace RandaAssetManager.Tests.AssetService
         public void GetAll()
         {
 
-            var assets = new List<Asset>() { };
+            Asset asset = new Asset()
+            {
+                AssetId = 1,
+                Name = "Cheese",
+                Cost = 2
+            };
 
-         ////   var mockRepo = new Mock<IAssetService>();
-         //   mockRepo.Setup(x => x.InsertCompany(company)).Returns(true);
+            List<Asset> assets = new List<Asset>();
+            assets.Add(asset);
 
-         //   var companyObject = new Company(mockRepo.Object);
-         //   var retrnData = companyObject.InsertCompany(company);
+            Mock<IAssetService> mockRepository = new Mock<IAssetService>();
+            mockRepository.Setup(s => s.GetAllAssets()).Returns(() => assets);
 
-         //   var result = _assetService.GetAllAssets();
-         //   Assert.Equals(new List<Asset>(), result);
+            List<Asset> resultAssets = mockRepository.Object.GetAllAssets();
+
+            Assert.AreEqual(assets, resultAssets);
+
         }
     }
 }
