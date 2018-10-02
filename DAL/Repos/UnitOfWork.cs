@@ -1,5 +1,6 @@
 ﻿
 
+using DAL.Entities;
 using DAL.Interfaces;
 using DAL.Models;
 
@@ -9,11 +10,7 @@ namespace DAL.Repos
     {
         protected string ConnectionString;
         private RandaDBContext context;
-
-        //public UnitOfWork(string connectionString)
-        //{
-        //    this.ConnectionString = connectionString;
-        //}
+        private Repository<Asset> _iAssetRepository { get; set; }
 
         public RandaDBContext DbContext
         {

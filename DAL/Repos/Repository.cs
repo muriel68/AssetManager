@@ -22,9 +22,9 @@ namespace DAL.Repos
             return query;
         }
 
-        public IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)
+        public TEntity FindBy(Expression<Func<TEntity, bool>> predicate)
         {
-            IQueryable<TEntity> query = DbContext.Set<TEntity>().Where(predicate);
+            TEntity query = DbContext.Set<TEntity>().Where(predicate).FirstOrDefault();
             return query;
         }
 

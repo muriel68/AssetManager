@@ -31,7 +31,7 @@ namespace Service.Services
 
         public void DeleteAsset(int id)
         {
-            Asset assetToDelete = _assetRepository.FindBy(a => a.AssetId == id).FirstOrDefault();
+            Asset assetToDelete = _assetRepository.FindBy(a => a.AssetId == id);
            _assetRepository.Delete(assetToDelete);
         }
 
@@ -53,7 +53,7 @@ namespace Service.Services
 
         public Asset GetAsset(int id)
         {
-            return _assetRepository.FindBy(a => a.AssetId == id).FirstOrDefault();
+            return _assetRepository.FindBy(a => a.AssetId == id);
         }
     }
 }

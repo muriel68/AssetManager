@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,28 +19,51 @@ namespace RandaAssetManager.Tests.AssetService
     [TestClass]
     public class AssetServiceTest
     {
+        Mock<IRepository<Asset>> _mockAssetDBSet;
+        Mock<RandaDBContext> mockContext;
+
         public AssetServiceTest() { }
 
+
         [TestMethod]
-        public void GetAll()
+        public void FindAsset()
         {
+            //Arrange
+            var assetId = 1;
+            var expected = "Asset Test";
+            var asset = new Asset() { Name = expected, AssetId = assetId };
 
-            Asset asset = new Asset()
-            {
-                AssetId = 1,
-                Name = "Cheese",
-                Cost = 2
-            };
+            var assetRepositoryMock = new Mock<IRepository<Asset>>();
+            assetRepositoryMock.Setup(m => m.FindBy(a => a.AssetId == assetId)).Returns(asset).Verifiable();
 
-            List<Asset> assets = new List<Asset>();
-            assets.Add(asset);
+            var uiniOfWorkMock = new Mock<IUnitOfWork>();
 
-            Mock<IAssetService> mockService = new Mock<IAssetService>();
-            mockService.Setup(s => s.GetAllAssets()).Returns(() => assets);
+            IAssetService sut = new Service.Services.AssetService(assetRepositoryMock.Object, uiniOfWorkMock.Object);
+            //Act;
+            var actual = sut.GetAsset(assetId);
 
-            List<Asset> resultAssets = mockService.Object.GetAllAssets();
+            //Assert
+            assetRepositoryMock.Verify();//verify that GetByID was called based on setup.
+            Assert.IsNotNull(actual);//assert that a result was returned
+            Assert.AreEqual(expected, actual);//assert that actual result was as expected
 
-            Assert.AreEqual(assets, resultAssets);
+
+            //Asset asset = new Asset()
+            //{
+            //    AssetId = 1,
+            //    Name = "Cheese",
+            //    Cost = 2
+            //};
+
+            //List<Asset> assets = new List<Asset>();
+            //assets.Add(asset);
+
+            //Mock<IAssetService> mockService = new Mock<IAssetService>();
+            //mockService.Setup(s => s.GetAllAssets()).Returns(() => assets);
+
+            //List<Asset> resultAssets = mockService.Object.GetAllAssets();
+
+            //Assert.AreEqual(assets, resultAssets);
 
         }
 
