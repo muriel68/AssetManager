@@ -14,7 +14,7 @@ namespace Service.Interfaces
 
         List<Asset> GetAllAssets();
         Asset GetAsset(int id);
-        void AddAsset(Asset asset);
+        Asset AddAsset(Asset asset);
         void DeleteAsset(int id);
         void EditAsset(Asset asset);
     }

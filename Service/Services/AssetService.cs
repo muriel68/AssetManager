@@ -22,10 +22,11 @@ namespace Service.Services
             _unitOfWork = unitOfWork; //injected
         }
 
-        public void AddAsset(Asset asset)
+        public Asset AddAsset(Asset asset)
         {
             _assetRepository.Add(asset);
             _unitOfWork.Save();
+            return asset;
         }
 
         public void DeleteAsset(int id)
