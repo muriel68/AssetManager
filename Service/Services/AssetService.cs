@@ -12,20 +12,20 @@ namespace Service.Services
     public class AssetService : IAssetService
     {
         IRepository<Asset> _assetRepository;
-        IUnitOfWork _unitOfWork;
+    //    IUnitOfWork _unitOfWork;
 
-        public IRandaDBContext Context { get; set; }
+//        public IRandaDBContext Context { get; set; }
 
-        public AssetService(IRepository<Asset> assetRepository, IUnitOfWork unitOfWork)
+        public AssetService(IRepository<Asset> assetRepository)
         {
             _assetRepository = assetRepository;
-            _unitOfWork = unitOfWork; //injected
+          //  _unitOfWork = unitOfWork; //injected
         }
 
         public Asset AddAsset(Asset asset)
         {
             _assetRepository.Add(asset);
-            _unitOfWork.Save();
+         //   _unitOfWork.Save();
             return asset;
         }
 
@@ -38,7 +38,7 @@ namespace Service.Services
         public void EditAsset(Asset asset)
         {
             _assetRepository.Update(asset);
-            _unitOfWork.Save();
+          //  _unitOfWork.Save();
         }
 
         public List<Asset> GetAllAssets()

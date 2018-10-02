@@ -10,7 +10,7 @@ namespace Service.Interfaces
 {
     public interface IAssetService : IDisposable
     {
-        IRandaDBContext Context { get; set; }
+     //   IRandaDBContext Context { get; set; }
 
         List<Asset> GetAllAssets();
         Asset GetAsset(int id);

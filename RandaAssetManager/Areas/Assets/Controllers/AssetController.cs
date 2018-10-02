@@ -20,11 +20,10 @@ namespace RandaAssetManager.Areas.Assets.Controllers
         public AssetController()
         {
         }
-        public AssetController(IAssetService assetService, 
-                                IUnitOfWork uow)
+        public AssetController(IAssetService assetService)
         {
             this._assetService = assetService;
-            this._uow = uow;
+           // this._uow = uow;
         }
         // GET: Assets/Asset
         public ActionResult Index()

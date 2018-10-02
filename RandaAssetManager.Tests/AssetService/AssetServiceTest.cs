@@ -28,46 +28,55 @@ namespace RandaAssetManager.Tests.AssetService
         [TestMethod]
         public void FindAsset()
         {
-            //Arrange
             var assetId = 1;
             var expected = "Asset Test";
             var asset = new Asset() { Name = expected, AssetId = assetId };
 
-            var assetRepositoryMock = new Mock<IRepository<Asset>>();
+            var contextMock = new Mock<IRepository<Asset>>();
+            contextMock.Setup(a => a.Add(asset)).Returns(Mock.Of<Asset>());
+            //   contextMock.Setup(a => a.Set<Role>()).Returns(Mock.Of<IDbSet<Role>>);
+            //   contextMock.Setup(a => a.Set<Team>()).Returns(Mock.Of<IDbSet<Team>>);
+            contextMock.Verify();
 
-            assetRepositoryMock.Setup(m => m.Add(asset)).Returns(asset).Verifiable();
-          //  assetRepositoryMock.Setup(m => m.FindBy(a => a.AssetId == assetId)).Returns(asset).Verifiable();
-
-            //var uintOfWorkMock = new Mock<IUnitOfWork>();
-
-            //IAssetService sut = new Service.Services.AssetService(assetRepositoryMock.Object, uintOfWorkMock.Object);
-            ////Act;
-            //uintOfWorkMock.Object.Save();
-            //var actual = sut.GetAsset(assetId);
+            //Arrange
 
 
-            //Assert
-            assetRepositoryMock.Verify();//verify that GetByID was called based on setup.
-         //   Assert.IsNotNull(actual);//assert that a result was returned
-          //  Assert.AreEqual(expected, actual);//assert that actual result was as expected
+            //   var assetRepositoryMock = new Mock<IRepository<Asset>>();
 
 
-            //Asset asset = new Asset()
-            //{
-            //    AssetId = 1,
-            //    Name = "Cheese",
-            //    Cost = 2
-            //};
+            //   assetRepositoryMock.Setup(m => m.Add(asset)).Returns(asset).Verifiable();
+            // //  assetRepositoryMock.Setup(m => m.FindBy(a => a.AssetId == assetId)).Returns(asset).Verifiable();
 
-            //List<Asset> assets = new List<Asset>();
-            //assets.Add(asset);
+            //   //var uintOfWorkMock = new Mock<IUnitOfWork>();
 
-            //Mock<IAssetService> mockService = new Mock<IAssetService>();
-            //mockService.Setup(s => s.GetAllAssets()).Returns(() => assets);
+            //   //IAssetService sut = new Service.Services.AssetService(assetRepositoryMock.Object, uintOfWorkMock.Object);
+            //   ////Act;
+            //   //uintOfWorkMock.Object.Save();
+            //   //var actual = sut.GetAsset(assetId);
 
-            //List<Asset> resultAssets = mockService.Object.GetAllAssets();
 
-            //Assert.AreEqual(assets, resultAssets);
+            //   //Assert
+            //   assetRepositoryMock.Verify();//verify that GetByID was called based on setup.
+            ////   Assert.IsNotNull(actual);//assert that a result was returned
+            // //  Assert.AreEqual(expected, actual);//assert that actual result was as expected
+
+
+            //   //Asset asset = new Asset()
+            //   //{
+            //   //    AssetId = 1,
+            //   //    Name = "Cheese",
+            //   //    Cost = 2
+            //   //};
+
+            List<Asset> assets = new List<Asset>();
+            assets.Add(asset);
+
+            Mock<IAssetService> mockService = new Mock<IAssetService>();
+            mockService.Setup(s => s.GetAllAssets()).Returns(() => assets);
+
+            List<Asset> resultAssets = mockService.Object.GetAllAssets();
+
+            Assert.AreEqual(assets, resultAssets);
 
         }
 
@@ -83,9 +92,9 @@ namespace RandaAssetManager.Tests.AssetService
             };
 
             Mock<IRepository<Asset>> mockService = new Mock<IRepository<Asset>>();
-            mockService.Setup(s => s.Add(asset));
-
+            mockService.Setup(s => s.Add(asset)).Returns(() => asset);
             var result = mockService.Object.Add(asset);
+            var mockAsset = mockService.Object.FindBy(a => a.AssetId == asset.AssetId);
 
             Assert.AreEqual(asset, result);
 

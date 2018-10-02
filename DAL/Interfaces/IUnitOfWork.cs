@@ -12,7 +12,7 @@ namespace DAL.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         RandaDBContext DbContext { get; }
-        IRepository<Asset> AssetRepository { get; }
+      //  IRepository<Asset> AssetRepository { get; }
         int Save();
     }
 

@@ -31,18 +31,21 @@ namespace DAL.Repos
         public TEntity Add(TEntity entity)
         {
             TEntity query = DbContext.Set<TEntity>().Add(entity);
+            DbContext.SaveChanges();
             return query;
         }
 
         public void Delete(TEntity entity)
         {
             TEntity query = DbContext.Set<TEntity>().Remove(entity);
+            DbContext.SaveChanges();
         }
 
         public void Update(TEntity entity)
         {
             TEntity query = DbContext.Set<TEntity>().Find(entity);
             query = entity;
+            DbContext.SaveChanges();
         }
     }
 }
