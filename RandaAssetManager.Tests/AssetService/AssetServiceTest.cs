@@ -34,18 +34,22 @@ namespace RandaAssetManager.Tests.AssetService
             var asset = new Asset() { Name = expected, AssetId = assetId };
 
             var assetRepositoryMock = new Mock<IRepository<Asset>>();
-            assetRepositoryMock.Setup(m => m.FindBy(a => a.AssetId == assetId)).Returns(asset).Verifiable();
 
-            var uiniOfWorkMock = new Mock<IUnitOfWork>();
+            assetRepositoryMock.Setup(m => m.Add(asset)).Returns(asset).Verifiable();
+          //  assetRepositoryMock.Setup(m => m.FindBy(a => a.AssetId == assetId)).Returns(asset).Verifiable();
 
-            IAssetService sut = new Service.Services.AssetService(assetRepositoryMock.Object, uiniOfWorkMock.Object);
-            //Act;
-            var actual = sut.GetAsset(assetId);
+            //var uintOfWorkMock = new Mock<IUnitOfWork>();
+
+            //IAssetService sut = new Service.Services.AssetService(assetRepositoryMock.Object, uintOfWorkMock.Object);
+            ////Act;
+            //uintOfWorkMock.Object.Save();
+            //var actual = sut.GetAsset(assetId);
+
 
             //Assert
             assetRepositoryMock.Verify();//verify that GetByID was called based on setup.
-            Assert.IsNotNull(actual);//assert that a result was returned
-            Assert.AreEqual(expected, actual);//assert that actual result was as expected
+         //   Assert.IsNotNull(actual);//assert that a result was returned
+          //  Assert.AreEqual(expected, actual);//assert that actual result was as expected
 
 
             //Asset asset = new Asset()

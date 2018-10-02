@@ -10,7 +10,7 @@ namespace DAL.Repos
     {
         protected string ConnectionString;
         private RandaDBContext context;
-        private Repository<Asset> _iAssetRepository { get; set; }
+        public IRepository<Asset> AssetRepository { get; set; }
 
         public RandaDBContext DbContext
         {
@@ -23,6 +23,7 @@ namespace DAL.Repos
                 return context;
             }
         }
+
 
         public int Save()
         {

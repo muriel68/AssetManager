@@ -1,4 +1,5 @@
 ﻿using System;
+using DAL.Entities;
 using DAL.Models;
 
 
@@ -11,6 +12,7 @@ namespace DAL.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         RandaDBContext DbContext { get; }
+        IRepository<Asset> AssetRepository { get; }
         int Save();
     }
 
